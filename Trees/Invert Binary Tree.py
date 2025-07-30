@@ -21,18 +21,15 @@ class Solution:
         # TC: O(n), SC: O(n)
         if not root:
             return None
-
-        # Implement a queue starting with root    
         q = deque()
         q.append(root)
         while q:
-            # Iterate over all the nodes at the current level
-            for _ in range(len(q)):
-                currNode = q.popleft()
-                currNode.left, currNode.right = currNode.right, currNode.left
-                if currNode.left:
-                    q.append(currNode.left)
-                if currNode.right:
-                    q.append(currNode.right)
-        
+            currNode = q.popleft()
+            temp = currNode.left
+            currNode.left = currNode.right
+            currNode.right = temp
+            if currNode.left:
+                q.append(currNode.left)
+            if currNode.right:
+                q.append(currNode.right)
         return root
