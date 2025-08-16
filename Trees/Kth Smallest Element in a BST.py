@@ -22,7 +22,7 @@ class Solution:
         return arr[k - 1]
 
 
-        # optimal
+        # better
         # TC: O(n), SC: O(n)
         arr = []
         def dfs(node):
@@ -33,3 +33,20 @@ class Solution:
             dfs(node.right)
         dfs(root)
         return arr[k - 1]
+    
+        # optimal
+        # TC: O(n), SC: O(height)
+        i = 0
+        res = None
+        def dfs(curr):
+            nonlocal i, res
+            if not curr:
+                return
+            dfs(curr.left)
+            i += 1
+            if i == k:
+                res = curr.val
+                return
+            dfs(curr.right)
+        dfs(root)
+        return res
